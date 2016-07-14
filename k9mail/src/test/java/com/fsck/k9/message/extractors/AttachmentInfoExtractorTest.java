@@ -7,7 +7,7 @@ import com.fsck.k9.mail.Part;
 import com.fsck.k9.mail.internet.MimeHeader;
 import com.fsck.k9.mailstore.AttachmentViewInfo;
 import com.fsck.k9.mailstore.LocalBodyPart;
-import com.fsck.k9.mailstore.ProvidedTempFileBody;
+import com.fsck.k9.mailstore.DeferredFileBody;
 import com.fsck.k9.provider.AttachmentProvider;
 import org.junit.Before;
 import org.junit.Test;
@@ -114,7 +114,7 @@ public class AttachmentInfoExtractorTest {
     }
 
     @Test
-    public void extractInfoForDb__wWithDispositionAttach__shouldReturnNamedFirstClassAttachment() throws Exception {
+    public void extractInfoForDb__withDispositionAttach__shouldReturnNamedFirstClassAttachment() throws Exception {
         Part part = mock(Part.class);
         when(part.getDisposition()).thenReturn("attachment" + "; filename=\"filename.ext\"; meaningless=\"dummy\"");
 
@@ -159,7 +159,7 @@ public class AttachmentInfoExtractorTest {
 
     @Test
     public void extractInfo__withProvidedTempFileBody() throws Exception {
-        ProvidedTempFileBody body = mock(ProvidedTempFileBody.class);
+        DeferredFileBody body = mock(DeferredFileBody.class);
         Part part = mock(Part.class);
         when(part.getBody()).thenReturn(body);
         when(part.getMimeType()).thenReturn(TEST_MIME_TYPE);
